@@ -1,0 +1,16 @@
+.bookSelection_cover {
+    max-width: 200px;
+}
+
+.bookSelection_row--accent {
+    background: #def;
+}
+
+.bookSelection_cell {
+    padding: 2em;
+    vertical-align: top;
+}
+
+.bookSelection_cell:nth-child(3) {
+    padding: 0;
+}
