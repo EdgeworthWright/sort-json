@@ -1,4 +1,4 @@
-.bookSelection_cover {
+.bookSelection__cover {
     max-width: 200px;
 }
 
@@ -13,4 +13,16 @@
 
 .bookSelection_cell:nth-child(3) {
     padding: 0;
+}
+
+/* Layout sections */
+.bookSelection {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-gap: 1em;
+    margin-bottom: 1em;
+}
+
+.bookSelection__price {
+    font-size: 2em;
 }
