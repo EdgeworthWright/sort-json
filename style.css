@@ -1,3 +1,11 @@
+* {
+    margin: 0;
+}
+
+body {
+    font-family: Comic Sans MS;
+}
+
 .bookSelection__cover {
     max-width: 200px;
 }
@@ -25,4 +33,8 @@
 
 .bookSelection__price {
     font-size: 2em;
+}
+
+.bookSelection__other {
+    color: #444;
 }

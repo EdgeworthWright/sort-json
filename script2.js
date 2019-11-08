@@ -25,7 +25,9 @@ xmlhttp.onreadystatechange = function() {
         sortBookObj.addDate();
         // The data must have a property for capital letters
         sortBookObj.data.forEach( book => {
-            book.titleUpper = book.titel.toUpper;
+            book.titelUpper = book.titel.toUpperCase();
+            // Lastname first author
+            book.authorSort = book.auteur[0];
         });
 
         sortBookObj.sort();
@@ -138,7 +140,7 @@ const reverseText = (string) => {
 let sortBookObj = {
     data: "",   // this.responseText
 
-    attribute: "titel",
+    attribute: "titelUpper",
 
     sortDirection: 1,
 
@@ -180,16 +182,30 @@ let sortBookObj = {
             title.className = 'bookSelection__title';
             title.textContent = reverseText(book.titel);
 
+            // Authors
+            let authors = document.createElement('p');
+            authors.className = 'bookSelection__author';
+            // Reverse 1st authors name
+            book.auteur[0] = reverseText(book.auteur[0]);
+            authors.textContent = createSummary(book.auteur);
+
+            // other
+            let other = document.createElement('p');
+            other.className = 'bookSelection__other';
+            other.textContent = book.uitgave + '\r\npages: ' + book.paginas + '\r\n' + book.taal + '\r\nean: ' + book.ean;
+
             // Price
             let price = document.createElement('div');
             price.className = 'bookSelection__price';
-            price.textContent = "€ " + book.prijs;
+            price.textContent = book.prijs.toLocaleString('nl-NL', {currency: 'EUR', style: 'currency'});
             
             // add element
             section.appendChild(picture);
             section.appendChild(main);
             main.appendChild(title);
-            section.appendChild(price);
+            main.appendChild(authors);
+            main.appendChild(other);
+            main.appendChild(price);
             document.getElementById('output').appendChild(section);
         });   
     }
