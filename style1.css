@@ -73,9 +73,15 @@ input, label {
     white-space: pre;
 }
 
+.bookSelection__price {
+    font-size: 2em;
+    text-align: right;
+    margin: -2em 0;
+}
+
 .bookSelection__button {
     display: block;
-    margin: 1.5em auto;
+    margin: 5em auto;
     padding: 1em 2em;
     background: #1139d6;
     border: none;
@@ -132,4 +138,41 @@ input, label {
     .bookSelection__cover {
         height: 30vh;
     }
+}
+
+/* Ordered books */
+#outputCart {
+    display: block;
+    margin: 1em;
+}
+
+.orderedBook {
+    text-align: center;
+    background: red;
+    box-shadow: inset 0 0 10px black;
+    padding: 1em;
+    margin-bottom: 2em;
+    max-width: 60vw;
+}
+
+.orderedBook:hover {
+    box-shadow: 0 0 10px black; 
+}
+
+.orderedBook__main {
+    margin: 1em 0;
+   text-align: center;
+}
+
+.orderedBook__cover {
+    width: 100%;
+    height: 50vh;
+    object-fit: contain;
+    background: rgba(0,0,0,.5);
+}
+
+.orderedBook__price {
+    font-size: 2em;
+    text-align: center;
+    margin: 1em 0 0;
 }

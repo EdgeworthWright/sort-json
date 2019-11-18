@@ -2,7 +2,7 @@ let debug = true;
 
 // execute tablehead in markup from an array
 const createTableHead = (arr) => {
-    let head = "<table class='bookSelection'><tr>";
+    let head = "<table class='orderedBook'><tr>";
     arr.forEach((item) => {
         head += "<th>" + item + "</th>";
     });
@@ -84,74 +84,48 @@ let cart = {
             order = JSON.parse(localStorage.getItem('orderedBooks'));
             document.querySelector('.cart__amount').innerHTML = order.length;
         }
+        order.forEach( item => {
+            this.items.push(item);
+        })
         return order;
-    },
-    add: function (book) {
-        this.items = this.getItems();
-        this.items.push(book);
-        localStorage.setItem('orderedBooks', JSON.stringify(this.items));
-        document.querySelector('.cart__amount').innerHTML = this.items.length;
     },
     execute: function () {
         // empty output
-        document.getElementById('output').innerHTML = "";
+        document.getElementById('outputCart').innerHTML = "";
 
         this.items.forEach(book => {
             let section = document.createElement('section');
-            section.className = 'bookSelection';
+            section.className = 'orderedBook';
 
             // Main with everything except for price and img
             let main = document.createElement('main');
-            main.className = "bookSelection__main";
+            main.className = "orderedBook__main";
 
             // Cover
             let picture = document.createElement('img');
-            picture.className = 'bookSelection__cover';
+            picture.className = 'orderedBook__cover';
             picture.setAttribute('src', book.cover);
             picture.setAttribute('alt', book.titel);
 
             // Title
             let title = document.createElement('h3');
-            title.className = 'bookSelection__title';
+            title.className = 'orderedBook__title';
             title.textContent = reverseText(book.titel);
-
-            // Authors
-            let authors = document.createElement('p');
-            authors.className = 'bookSelection__author';
-            // Reverse 1st authors name
-            book.auteur[0] = reverseText(book.auteur[0]);
-            authors.textContent = createSummary(book.auteur);
-
-            // other
-            let other = document.createElement('p');
-            other.className = 'bookSelection__other';
-            other.textContent = book.uitgave + '\r\npages: ' + book.paginas + '\r\n' + book.taal + '\r\nean: ' + book.ean;
 
             // Price
             let price = document.createElement('div');
-            price.className = 'bookSelection__price';
+            price.className = 'orderedBook__price';
             price.textContent = book.prijs.toLocaleString('nl-NL', {
                 currency: 'EUR',
                 style: 'currency'
-            });
-
-            // Buy button
-            let button = document.createElement('button');
-            button.className = 'bookSelection__button';
-            button.innerHTML = 'Add to cart';
-            button.addEventListener('click', () => {
-                cart.add(book);
             });
 
             // add element
             section.appendChild(picture);
             section.appendChild(main);
             main.appendChild(title);
-            main.appendChild(authors);
-            main.appendChild(other);
-            price.appendChild(button);
             main.appendChild(price);
-            document.getElementById('output').appendChild(section);
+            document.getElementById('outputCart').appendChild(section);
 
         });
     }
