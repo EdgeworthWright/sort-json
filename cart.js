@@ -84,7 +84,7 @@ let cart = {
             order = JSON.parse(localStorage.getItem('orderedBooks'));
             document.querySelector('.cart__amount').innerHTML = order.length;
         }
-        order.forEach( item => {
+        order.forEach(item => {
             this.items.push(item);
         })
         return order;
@@ -120,11 +120,16 @@ let cart = {
                 style: 'currency'
             });
 
+            // Delete button
+            let deleteButton = document.createElement('div');
+            deleteButton.className = 'orderedBook__delete';
+
             // add element
             section.appendChild(picture);
             section.appendChild(main);
-            main.appendChild(title);
-            main.appendChild(price);
+            section.appendChild(title);
+            section.appendChild(price);
+            section.appendChild(deleteButton);
             document.getElementById('outputCart').appendChild(section);
 
         });

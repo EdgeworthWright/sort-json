@@ -151,7 +151,7 @@ input, label {
     background: red;
     box-shadow: inset 0 0 10px black;
     padding: 1em;
-    margin-bottom: 2em;
+    margin: 0 auto 2em;
     max-width: 60vw;
 }
 
@@ -175,4 +175,12 @@ input, label {
     font-size: 2em;
     text-align: center;
     margin: 1em 0 0;
+}
+
+.orderedBook__delete {
+    width: 3em;
+    height: 3em;
+    background-image: url(images/deletecan.png);
+    background-size: cover;
+    cursor: pointer;
 }
