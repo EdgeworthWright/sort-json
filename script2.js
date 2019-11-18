@@ -141,11 +141,25 @@ const reverseText = (string) => {
 // Delete books
 let cart = {
     items: [],
+    getItems: function() {
+        let order;
+        if(localStorage.getItem('orderedBooks') == null) {
+            order = [];
+        } else {
+            order = JSON.parse(localStorage.getItem('orderedBooks'));
+            document.querySelector('.cart__amount').innerHTML = order.length;
+        }
+        return order;
+    },
     add: function(book) {
+        this.items = this.getItems();
         this.items.push(book);
+        localStorage.setItem('orderedBooks', JSON.stringify(this.items));
         document.querySelector('.cart__amount').innerHTML = this.items.length;
     }
 }
+
+cart.getItems();
 
 
 // Object that executes books and sorts them
