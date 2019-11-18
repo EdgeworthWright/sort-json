@@ -82,12 +82,33 @@ let cart = {
             order = [];
         } else {
             order = JSON.parse(localStorage.getItem('orderedBooks'));
+            if (order.length > 0) {
+                document.querySelector('.cart__amount').innerHTML = order.length;
+            } else {
+                document.querySelector('.cart__amount').innerHTML = null;
+            }
             document.querySelector('.cart__amount').innerHTML = order.length;
         }
         order.forEach(item => {
             this.items.push(item);
         })
         return order;
+    },
+    // Delete with ean
+    deleteItem: function(ean) {
+        this.items.forEach((item, index) => {
+            if (item.ean == ean) {
+                this.items.splice(index,1);
+
+            }
+        });
+        localStorage.setItem('orderedBooks', JSON.stringify(this.items));
+        if (this.items.length > 0) {
+            document.querySelector('.cart__amount').innerHTML = this.items.length;
+        } else {
+            document.querySelector('.cart__amount').innerHTML = null;
+        }
+        this.execute();
     },
     execute: function () {
         // empty output
@@ -123,6 +144,9 @@ let cart = {
             // Delete button
             let deleteButton = document.createElement('div');
             deleteButton.className = 'orderedBook__delete';
+            deleteButton.onclick = ()=>{
+                this.deleteItem(book.ean);
+            };
 
             // add element
             section.appendChild(picture);

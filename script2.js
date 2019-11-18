@@ -147,7 +147,11 @@ let cart = {
             order = [];
         } else {
             order = JSON.parse(localStorage.getItem('orderedBooks'));
-            document.querySelector('.cart__amount').innerHTML = order.length;
+            if (this.items.length > 0) {
+                document.querySelector('.cart__amount').innerHTML = order.length;
+            } else {
+                document.querySelector('.cart__amount').innerHTML = null;
+            }
         }
         return order;
     },
