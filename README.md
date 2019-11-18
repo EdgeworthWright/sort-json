@@ -7,4 +7,4 @@ Fro opdracht waarin we JSON moesten sorteren
 
 `>>>>>>` [LINK 2](http://25890.hosts2.ma-cloud.nl/bewijzenmap/periode2.1/FRO/JSON2) `<<<<<<`
 
-`>>>>>>` [LINK 3]() `<<<<<<`
+`>>>>>>` [LINK 3](http://25890.hosts2.ma-cloud.nl/bewijzenmap/periode2.1/FRO/JSON3) `<<<<<<`
