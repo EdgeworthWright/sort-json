@@ -134,6 +134,20 @@ const reverseText = (string) => {
     }
     return string;
 }
+
+// Cart that has
+// Books
+// Add books
+// Delete books
+let cart = {
+    items: [],
+    add: function(book) {
+        this.items.push(book);
+        document.querySelector('.cart__amount').innerHTML = this.items.length;
+    }
+}
+
+
 // Object that executes books and sorts them
 // Properties: data, (sort)attribute
 // Methods: sort(), execute()
@@ -199,12 +213,21 @@ let sortBookObj = {
             price.className = 'bookSelection__price';
             price.textContent = book.prijs.toLocaleString('nl-NL', {currency: 'EUR', style: 'currency'});
             
+            // Buy button
+            let button = document.createElement('button');
+            button.className = 'bookSelection__button';
+            button.innerHTML = 'Add to cart';
+            button.addEventListener('click', ()=>{
+                cart.add(book);
+            });
+            
             // add element
             section.appendChild(picture);
             section.appendChild(main);
             main.appendChild(title);
             main.appendChild(authors);
             main.appendChild(other);
+            price.appendChild(button);
             main.appendChild(price);
             document.getElementById('output').appendChild(section);
         });   

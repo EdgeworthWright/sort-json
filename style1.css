@@ -20,6 +20,10 @@ body {
     top: 1.5em;
 }
 
+#attribute {
+    color: black;
+}
+
 .topOfPage {
     text-align: center;
     margin: 1em;
@@ -67,6 +71,43 @@ input, label {
 
 .bookSelection__other {
     white-space: pre;
+}
+
+.bookSelection__button {
+    display: block;
+    margin: 1.5em auto;
+    padding: 1em 2em;
+    background: #1139d6;
+    border: none;
+    box-shadow: 0 5px 10px black;
+    cursor: pointer;
+    color: white;
+}
+
+.bookSelection__button:hover {
+    background: #1444ff;
+}
+
+.cart {
+    width: 4em;
+    height: 4em;
+    background-image: url(images/shopping-cart.png);
+    background-size: contain;
+    float: right;
+    margin-right: 5em;
+    position: relative;
+}
+
+.cart__amount:not(:empty) {
+    display: inline-block;
+    background-color: red;
+    border: black 1px solid;
+    position: absolute;
+    top: -.5em;
+    right: -.5em;
+    line-height: .5em;
+    padding: .7em;
+    border-radius: 50%;
 }
 
 @media only screen and (max-width: 770px) {
