@@ -96,6 +96,7 @@ input, label {
     float: right;
     margin-right: 5em;
     position: relative;
+    cursor: pointer;
 }
 
 .cart__amount:not(:empty) {
