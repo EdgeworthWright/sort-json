@@ -2,7 +2,7 @@ let debug = true;
 
 // Sort choice
 let attribute = document.getElementById('attribute');
-attribute.addEventListener('change', (e)=>{
+attribute.addEventListener('change', (e) => {
     sortBookObj.attribute = e.target.value;
     sortBookObj.sort();
 });
@@ -19,12 +19,12 @@ let output = document.getElementById('output');
 
 
 let xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
+xmlhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         sortBookObj.data = JSON.parse(this.responseText);
         sortBookObj.addDate();
         // The data must have a property for capital letters
-        sortBookObj.data.forEach( book => {
+        sortBookObj.data.forEach(book => {
             book.titelUpper = book.titel.toUpperCase();
             // Lastname first author
             book.authorSort = book.auteur[0];
@@ -44,7 +44,7 @@ xmlhttp.send();
 const createTableHead = (arr) => {
     let head = "<table class='bookSelection'><tr>";
     arr.forEach((item) => {
-        head += "<th>" + item + "</th>"; 
+        head += "<th>" + item + "</th>";
     });
     head += "</tr>";
     return head;
@@ -55,7 +55,7 @@ const createTableHead = (arr) => {
 const giveMonthNumber = (m) => {
     let number;
 
-    switch(m){
+    switch (m) {
         case "januari":
             number = 0;
             break;
@@ -102,7 +102,7 @@ const giveMonthNumber = (m) => {
 
 // Function that converts a string to date object
 const createDate = (mY) => {
-    let mYArray = mY.split(" "); 
+    let mYArray = mY.split(" ");
     let date = new Date(mYArray[1], giveMonthNumber(mYArray[0]));
     return date;
 }
@@ -111,11 +111,11 @@ const createDate = (mY) => {
 const createSummary = (array) => {
     let string = "";
     for (let i = 0; i < array.length; i++) {
-        switch(i) {
-            case array.length-1:
+        switch (i) {
+            case array.length - 1:
                 string += array[i];
                 break;
-            case array.length-2:
+            case array.length - 2:
                 string += array[i] + " en ";
                 break;
             default:
@@ -141,13 +141,13 @@ const reverseText = (string) => {
 // Delete books
 let cart = {
     items: [],
-    getItems: function() {
+    getItems: function () {
         let order;
-        if(localStorage.getItem('orderedBooks') == null) {
+        if (localStorage.getItem('orderedBooks') == null) {
             order = [];
         } else {
             order = JSON.parse(localStorage.getItem('orderedBooks'));
-            if (this.items.length > 0) {
+            if (order.length > 0) {
                 document.querySelector('.cart__amount').innerHTML = order.length;
             } else {
                 document.querySelector('.cart__amount').innerHTML = null;
@@ -155,7 +155,7 @@ let cart = {
         }
         return order;
     },
-    add: function(book) {
+    add: function (book) {
         this.items = this.getItems();
         this.items.push(book);
         localStorage.setItem('orderedBooks', JSON.stringify(this.items));
@@ -170,32 +170,32 @@ cart.getItems();
 // Properties: data, (sort)attribute
 // Methods: sort(), execute()
 let sortBookObj = {
-    data: "",   // this.responseText
+    data: "", // this.responseText
 
     attribute: "titelUpper",
 
     sortDirection: 1,
 
     // add a date to this.data from string uitgave
-    addDate: function() {
-            this.data.forEach((item) => {
+    addDate: function () {
+        this.data.forEach((item) => {
             item.date = createDate(item.uitgave);
         })
     },
 
     // sort data
-    sort: function() {
-        this.data.sort((a, b) => a[this.attribute] > b[this.attribute] ? 1*this.sortDirection : -1*this.sortDirection );
+    sort: function () {
+        this.data.sort((a, b) => a[this.attribute] > b[this.attribute] ? 1 * this.sortDirection : -1 * this.sortDirection);
 
         this.execute(this.data);
     },
 
     // execute data
-    execute: function(data) {
+    execute: function (data) {
         // empty output
         document.getElementById('output').innerHTML = "";
 
-        data.forEach( book => {
+        data.forEach(book => {
             let section = document.createElement('section');
             section.className = 'bookSelection';
 
@@ -229,16 +229,25 @@ let sortBookObj = {
             // Price
             let price = document.createElement('div');
             price.className = 'bookSelection__price';
-            price.textContent = book.prijs.toLocaleString('nl-NL', {currency: 'EUR', style: 'currency'});
-            
+            price.textContent = book.prijs.toLocaleString('nl-NL', {
+                currency: 'EUR',
+                style: 'currency'
+            });
+
             // Buy button
             let button = document.createElement('button');
             button.className = 'bookSelection__button';
             button.innerHTML = 'Add to cart';
-            button.addEventListener('click', ()=>{
+            button.addEventListener('click', () => {
                 cart.add(book);
+                document.querySelector('#addedItem span').innerHTML = "Added \"" + reverseText(book.titel) + "\" to cart";
+                document.getElementById('addedItem').classList.add('show');
+                setTimeout(function () {
+                    document.getElementById('addedItem').classList.remove('show');
+                }, 2000);
+                document.getElementById('addedItem').style.display = "none";
             });
-            
+
             // add element
             section.appendChild(picture);
             section.appendChild(main);
@@ -248,6 +257,6 @@ let sortBookObj = {
             price.appendChild(button);
             main.appendChild(price);
             document.getElementById('output').appendChild(section);
-        });   
+        });
     }
 }

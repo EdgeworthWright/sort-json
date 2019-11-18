@@ -95,10 +95,10 @@ let cart = {
         return order;
     },
     // Delete with ean
-    deleteItem: function(ean) {
+    deleteItem: function (ean) {
         this.items.forEach((item, index) => {
             if (item.ean == ean) {
-                this.items.splice(index,1);
+                this.items.splice(index, 1);
 
             }
         });
@@ -144,7 +144,7 @@ let cart = {
             // Delete button
             let deleteButton = document.createElement('div');
             deleteButton.className = 'orderedBook__delete';
-            deleteButton.onclick = ()=>{
+            deleteButton.onclick = () => {
                 this.deleteItem(book.ean);
             };
 
