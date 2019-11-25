@@ -243,3 +243,15 @@ label {
     background-size: cover;
     cursor: pointer;
 }
+
+.orderedBook__total {
+    position: fixed;
+    top: 25vh;
+    right: 10vh;
+    display: grid;
+    grid-template-columns: auto auto;
+    box-shadow: 0 0 10px white;
+    width: 10em;
+    padding: 1em 0;
+    text-align: center;
+}

@@ -72,8 +72,8 @@ const reverseText = (string) => {
 // Cart that has
 // Books
 // Method: Show books
-// Method: Add books
 // Method: Delete books
+// Total price
 let cart = {
     items: [],
     getItems: function () {
@@ -109,6 +109,13 @@ let cart = {
             document.querySelector('.cart__amount').innerHTML = null;
         }
         this.execute();
+    },
+    total: function() {
+        let total = 0;
+        this.items.forEach(book => {
+            total += book.prijs;
+        });
+        return total;
     },
     execute: function () {
         // empty output
@@ -157,6 +164,24 @@ let cart = {
             document.getElementById('outputCart').appendChild(section);
 
         });
+
+        let section = document.createElement('section');
+        section.className = 'orderedBook__total';
+
+        // Total price
+        let totalText = document.createElement('div');
+        totalText.className = 'orderedBook__total-price';
+        totalText.innerHTML = 'Total: ';
+
+        let totalPrice = document.createElement('div');
+        totalPrice.textContent = this.total().toLocaleString('nl-NL', {
+            currency: 'EUR',
+            style: 'currency'
+        });;
+
+        section.appendChild(totalText);
+        section.appendChild(totalPrice);
+        document.getElementById('outputCart').appendChild(section);
     }
 }
 
