@@ -99,7 +99,7 @@ let cart = {
         this.items.forEach((item, index) => {
             if (item.ean == ean) {
                 this.items.splice(index, 1);
-
+                ean = 4;
             }
         });
         localStorage.setItem('orderedBooks', JSON.stringify(this.items));
